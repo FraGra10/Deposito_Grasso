@@ -1,4 +1,4 @@
-# Qui proveremo le variabili e i tipi di variabili 
+#Qui proveremo le variabili e i tipi di variabili 
 
 
 #Esempio di accesso ai caratteri delle variabili
