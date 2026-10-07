@@ -33,3 +33,8 @@ for i in range(2,8):
     
 for i in range(1,10,2):
     print(i)
+    
+#---------------------------------------------------------------------
+#prova con splat
+prova =[*range(10)]
+print(prova)
