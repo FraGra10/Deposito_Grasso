@@ -78,17 +78,21 @@ while(True):
     
     operazione = int(input("Scegli 1,2,3,4,5,6 o 7 per uscire: "))
     
+    #Generazione lista_random con print della lunghezza della lista ed elementi lista    
     if(operazione == 1):
         lista_numeri = lista_random(n)
         print("Generata una lista di: ", len(lista_numeri), "elementi")
         print("La lista generata è: ", lista_numeri)
     
+    #Somma dei numeri pari della lista con print
     if(operazione == 2):
         somma_pari(lista_numeri)
-        
+    
+    #Stampa dei numeri dispari della lista
     if(operazione == 3):
         stampa_dispari(lista_numeri)
-        
+    
+    #Ricerca del primo numero primo della lista se presente con stampa
     if(operazione == 4):
         
         if(cerca_primo(lista_numeri) == True):
@@ -96,13 +100,15 @@ while(True):
         else:
             print("Nella lista non è presente un numero primo")
     
+    #Stampa di tutti i numeri primi della lista
     if(operazione == 5):
         stampa_primi(lista_numeri)
-        
+    
+    #Calcolo della somma totale dei numeri della lista; valutazione della somma come numero primo
     if(operazione == 6):
         somma_totale(lista_numeri)
         
-    
+    #Uscita dal menu
     if(operazione ==7):
         break
     
