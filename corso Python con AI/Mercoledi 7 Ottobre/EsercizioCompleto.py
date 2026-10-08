@@ -1,6 +1,6 @@
 #esercizio completo con for,while,if
 
-lista_totale = []
+lista_finale = []
 
 while(True):
     
@@ -28,18 +28,18 @@ while(True):
     else:
         print("Il numero da te inserito non è primo!")
     
-    lista_totale.append(n)
-    lista_totale.append(sum(numeri_pari))
-    lista_totale.append(numeri_dispari)
+    lista_finale.append(n)
+    lista_finale.append(sum(numeri_pari))
+    lista_finale.append(numeri_dispari)
     
     if n >= 2 and all(n % i != 0 for i in range(2, int(n**0.5) + 1)):
-        lista_totale.append("Numero Primo")
+        lista_finale.append("Numero Primo")
     else:
-        lista_totale.append("Numero non Primo")
+        lista_finale.append("Numero non Primo")
         
     
     print("Risultati:")
-    print(lista_totale)
+    print(lista_finale)
               
 
     operazione = input("vuoi continuare? S o N: ")
