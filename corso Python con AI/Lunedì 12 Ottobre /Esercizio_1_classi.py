@@ -32,6 +32,8 @@ class Libro:
         self.autore = autore
         self.pagine = pagine
         
+    def __str__(self):
+        print("Ciao sono una stringa!")
     
     def descrizione(self):
         
