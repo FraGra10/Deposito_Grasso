@@ -43,14 +43,17 @@ Conto = ContoCorrente("Francesco", 100)
 while(True):
     operazione= input("Inserisci operazione da eseguire: deposito,prelievo,stampa, esci: ")
 
+#operazione di deposito 
     if(operazione.lower() == "deposito"):
         importo = int(input("Inserisci importo da aggiungere: "))
         Conto.deposito(importo)  
-        
+
+#operazione di prelievo
     if(operazione.lower() == "prelievo"):
         importo = int(input("Inserisci importo da prelevare: "))
         Conto.preleva(importo)
 
+#operazione di stampa
     if(operazione.lower() == "stampa"):
         Conto.stampa_saldo()
         

@@ -1,5 +1,6 @@
 import math 
 
+#Definizione della classe Punto 
 class Punto:
     
     def __init__(self,x,y):
@@ -43,6 +44,7 @@ class Libro:
 
 Lista_libri = []
 
+#Inserimento del libro nella lista tramite oggetto istanziato
 while(True): 
     
     operazione= int((input("Vuoi inserire un libro o uscire? 1 o 2: ")))

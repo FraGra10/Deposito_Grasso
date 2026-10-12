@@ -1,4 +1,5 @@
 '''
+#Esempio classe con funzione speciale __str__
 class Studente:
     
     def __init__(self,nome,eta):
@@ -15,6 +16,7 @@ print(Studente_1)
 '''
 #--------------------------------------------
 '''
+#Esempio classe con funzione speciale __len__
 class Squadra: 
     
     def __init__(self,nome,giocatori):
@@ -31,6 +33,7 @@ print(len(squadra1))
 '''
 #---------------------------------------------------------------
 
+#Esempio di classe con la funzione speciale call
 class Moltiplicatore:
     
     def __init__(self,numero):
