@@ -7,6 +7,8 @@ class ContoCorrente():
         
         self.intestatario = intestatario 
         self.saldo = saldo
+    
+    #Metodo per depositare sul saldo 
         
     def deposito(self,importo):
         if(importo > 0):
@@ -15,6 +17,7 @@ class ContoCorrente():
         else:
             print("Errore, importo non valido!")
     
+    #Metodo per prelevare dal saldo
     def preleva(self,importo):
         
         if(importo > 0 and self.saldo >= importo):
@@ -26,7 +29,8 @@ class ContoCorrente():
             print("Errore, importo non valido!")
         else:
             print("Errore, saldo non sufficiente!")
-            
+    
+    #Metodo per stampare il saldo         
     def stampa_saldo(self):
         
         print("Il saldo di ", self.intestatario, "è", self.saldo, "$")
@@ -35,6 +39,7 @@ class ContoCorrente():
                 
 Conto = ContoCorrente("Francesco", 100)
 
+#Ciclo con le varie operazioni da compiere
 while(True):
     operazione= input("Inserisci operazione da eseguire: deposito,prelievo,stampa, esci: ")
 
