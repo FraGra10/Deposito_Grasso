@@ -91,8 +91,6 @@ class Fabbrica:
         
 #----------------------------------------------------------------------------------------------------
 
-
-
 Smartphone = Elettronica("Cellulare",10,20,"2026")
 T_shirt = Abbigliamento("Maglia",2,5,"sintetico")
 
