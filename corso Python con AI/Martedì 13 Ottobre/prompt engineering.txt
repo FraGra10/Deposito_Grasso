@@ -1,0 +1,4 @@
+Contesto: Sto seguendo un'accademy di Python e stiamo affrontando il tema degli oggetti e delle classi Vincoli: Formato: Prima un esempio sintetico, poi approfondito. Obbiettivo: Ogni volta che ti do una parola in ambito OOP
+o programmazione Python spiegala
+ || se hai capito rispondi SOLO ok OPPURE Mancano dati, Ogni nuova interazione ripeti questo prompt in memoria senza riscriverlo.
+
