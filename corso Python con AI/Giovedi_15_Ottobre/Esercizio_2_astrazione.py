@@ -9,6 +9,7 @@ class VeicoloTrasporto(ABC):
         self.__peso_massimo = peso_massimo
         self.__carico_attuale = carico_attuale
     
+    #Metodo per aggiungere peso al carico attuale
     def carica(self,peso):
         
         if(self.__carico_attuale + peso > self.__peso_massimo):
@@ -16,6 +17,8 @@ class VeicoloTrasporto(ABC):
         else:
             self.__carico_attuale += peso
             print("Peso aggiunto correttamente al carico attuale!")
+
+    #Metodo per togliere peso al carico attuale
     
     def scarica(self):
         self.__carico_attuale = 0
@@ -56,6 +59,7 @@ class VeicoloTrasporto(ABC):
             self.__peso_massimo = peso_massimo
 ##############################################################################
 
+#Prima classe derivata
 class Camion(VeicoloTrasporto):
     
     def __init__(self,targa,peso_massimo,carico_attuale,numero_assi):
@@ -63,7 +67,8 @@ class Camion(VeicoloTrasporto):
         super().__init__(targa,peso_massimo,carico_attuale)
         
         self.__numero_assi = numero_assi
-        
+
+#Sovrascrittura del metodo costo_manutenzione        
     def costo_manutenzione(self):
         
         costo_manutenzione = self.__numero_assi*100 + self.get_peso()
@@ -72,12 +77,14 @@ class Camion(VeicoloTrasporto):
         
     
 
-
+#Seconda classe derivata
 class Furgone(VeicoloTrasporto):
  
     def __init__(self,targa,peso_massimo,carico_attuale,alimentazione):
         super().__init__(targa,peso_massimo,carico_attuale)
         self.__alimentazione = alimentazione
+        
+#Sovrascrittura del metodo costo_manutenzione        
         
     def costo_manutenzione(self):
         
@@ -88,12 +95,15 @@ class Furgone(VeicoloTrasporto):
         
         return costo_manutenzione
 
+#Terza classe derivata
 class Motocarro(VeicoloTrasporto):
     
     def __init__(self,targa,peso_massimo,carico_attuale,anni_servizio):
         super().__init__(targa,peso_massimo,carico_attuale)  
         self.__anni_servizio = anni_servizio   
-    
+        
+#Sovrascrittura del metodo costo_manutenzione        
+   
     def costo_manutenzione(self):
         
         costo_manutenzione = 50*self.__anni_servizio
@@ -101,11 +111,13 @@ class Motocarro(VeicoloTrasporto):
         return costo_manutenzione
 ###############################################################
 
+#Classe Gestore Flotta
 class GestoreFlotta():
     
     def __init__(self):
         self.veicoli = []
-        
+
+#Funzione per aggiungere un veicolo alla lista  
     def aggiungi_veicolo(self):
         
         tipo = input("Inserisci il tipo di veicolo da aggiungere: camion, furgone, o motocarro: ")
@@ -134,6 +146,7 @@ class GestoreFlotta():
 
             self.veicoli.append(Motocarro(targa,peso,carico,anni))
 
+#Funzione per rimuovere un veicolo dalla lista 
     def rimuovi_veicolo(self,targa):
         flag = False
         for i in self.veicoli:
@@ -144,7 +157,8 @@ class GestoreFlotta():
         
         if(not flag):
             print("Veicolo non trovato!")
-            
+ 
+#Funzione per calcolare il costo totale di manutenzione            
     def costo_totale_manutenzione(self):
         somma = 0 
         for i in self.veicoli:
@@ -166,7 +180,8 @@ class GestoreFlotta():
 Gestore = GestoreFlotta()
     
 while(True):
-    
+
+#Menu con le scelte definite in base ai metodi implementati in GestoreFlotta
     print("Inserisci 1 per aggiungere un veicolo: ")
     print("Inserisci 2 per rimuovere un veicolo:  ")
     print("Insersci  3 per visualizzare il costo totale di manutenzione: ")
@@ -175,15 +190,21 @@ while(True):
     
     operazione = int(input(" "))
     
+    #Aggiunta di un veicolo
     if(operazione == 1):
         Gestore.aggiungi_veicolo()
+    
+    #Rimozione di un veicolo
     if(operazione == 2):
         
         targa = input("Digita la targa del veicolo da rimuovere: ")
         Gestore.rimuovi_veicolo(targa)
-        
+    
+    #Costo totale di manutenzione  
     if(operazione == 3):
         Gestore.costo_totale_manutenzione()
+    
+    #Stampa di tutti i veicoli 
     if(operazione == 4):
         Gestore.stampa_veicoli()
     if(operazione == 5): 
