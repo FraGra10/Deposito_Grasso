@@ -118,14 +118,16 @@ class Forno(Elettrodomestico):
     
 
 ####################################################################################################
+#Classe Ticket di Riparazione
 class TicketRiparazione:
-    def __init__(self,id_ticket,elettrodomestico,stato):
+    def __init__(self,id_ticket,elettrodomestico):
         
         self.__id_ticket = id_ticket
         self.__elettrodomestico = elettrodomestico
-        self.__stato = stato
+        self.__stato = ""
         self.__note = []
 
+#Funzioni getter  
     def get_stato(self):
         return self.__stato
     def get_note(self):
@@ -146,20 +148,22 @@ class TicketRiparazione:
         else:
             self.__stato = stato
             
-    def set_note(self, note):
+    def set_note(self, nota):
 
-        if len(note) <= 0 :
+        if len(nota) <= 0 :
             print("Note non valide!")
         else:
-            self.__note = note
-    
+            self.__note.append(nota)
+
+#Funzione per aggiungere una nota 
     def aggiungi_nota(self,testo):
         
         if(len(testo) > 0):
             self.__note.append(testo)
         else:
             print("nota non valida!")
-            
+
+#Funzione per calcolare il preventivo aggiornato 
     def calcola_preventivo(self,*voci_extra):
         
         costo_base = self.__elettrodomestico.stima_costo_base()
@@ -173,39 +177,47 @@ class TicketRiparazione:
         return costo_totale 
             
 ####################################################################################################
-            
+#Classe Officina 
+        
 class Officina:
     
     def __init__(self):
         
         self.nome = "" 
         self.tickets = []
-    
+
+#Funzione per aggiungere un ticket alla lista    
     def aggiungi_ticket(self,ticket):
         
         self.tickets.append(ticket)
-    
+
+#Funzione per chiudere un ticket 
+   
     def chiudi_ticket(self,id_ticket):
-        
         for i in self.tickets:
-            
+                        
             if(i.get_id_ticket() == id_ticket):
                 self.tickets.remove(i)
+                print("Ticket chiuso con successo!")
                 return
 
-        print("ID non trovato")
+        print("ID non trovato!")
+
+#Funzione per stampare ticket_aperti
             
     def stampa_ticket_aperti(self):
         for i in self.tickets:
             print("ID:", i.get_id_ticket(), "Tipo:" ,type(i.get_elettrodomestico()).__name__, "Stato: ", i.get_stato() )
-    
+
+#Funzione per calcolare il totale dei preventivi aperti    
     def totale_preventivi(self):
         somma = 0
         for i in self.tickets:
-            somma +=i.calcola_preventivo()
+            somma +=i.calcola_preventivo(0)
             
         print("La somma dei preventivi è: ", somma)
-        
+
+#Stats per tipo         
     def statistiche_per_tipo(self):
         
         num_forno =  0 
@@ -231,19 +243,25 @@ class Officina:
 
 #Main
 
-prova_1 = Frigorifero("Sony","DES",2000,"refrigerante",30,True)
-prova_2 = Forno("DSDS","FDR",2010,"centralina","elettrico",True)
-prova_3 = Lavatrice("Ericson","sss",2000,"centralina",10,300)
+Frigorifero_1 = Frigorifero("Samsung","XS54",2013,"refrigerazione",50,True)
+Forno_1 = Forno("Whirpool","FDR",2010,"centralina","elettrico",True)
+Lavatrice_1 = Lavatrice("Bosch","sss",2000,"centralina",10,800)
 
-Ticket = TicketRiparazione(10,prova_3,"Aperto")
-Ticket_1 = TicketRiparazione(10,prova_1,"Chiuso")
-Ticket_2 = TicketRiparazione(10,prova_2,"In Lavorazione")
+Ticket_1 = TicketRiparazione(1020,Frigorifero_1)
+Ticket_1.set_stato("Aperto")
+Ticket_2 = TicketRiparazione(2034,Forno_1)
+Ticket_2.set_stato("In lavorazione")
+Ticket_3 = TicketRiparazione(1837,Lavatrice_1)
+Ticket_3.set_stato("Chiuso")
+
 
 Officina_1 = Officina()
-Officina_1.aggiungi_ticket(Ticket)
-Officina_1.aggiungi_ticket(Ticket_2)
 Officina_1.aggiungi_ticket(Ticket_1)
 Officina_1.aggiungi_ticket(Ticket_2)
+Officina_1.aggiungi_ticket(Ticket_3)
 
 Officina_1.statistiche_per_tipo()
 Officina_1.stampa_ticket_aperti()
+
+Officina_1.totale_preventivi()
+Officina_1.chiudi_ticket(1837)
