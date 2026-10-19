@@ -1,0 +1,3 @@
+
+ciao a tutti, Mirko ci sta spiegando le funzioni Input Output di Python!
+Oggi è Lunedì 19 Ottobre!
