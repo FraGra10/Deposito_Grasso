@@ -1,0 +1,31 @@
+La matrice casuale con righe e colonne generate dall'utente è: 
+[[163 127 163 189]
+ [137  88  23 169]
+ [ 99 190 159 122]
+ [ 92 157  83  80]]
+
+La sotto matrice centrale è: 
+[[ 88  23]
+ [190 159]]
+
+La matrice trasposta è: 
+[[163 137  99  92]
+ [127  88 190 157]
+ [163  23 159  83]
+ [189 169 122  80]]
+
+La somma di tutti gli elementi della matrice è: 
+2041
+
+La matrice moltiplicata con righe e colonne generate dall'utente è: 
+[[25265   254   489 32697]
+ [ 7535  3080  3151 11999]
+ [14256 22990 17490  8662]
+ [ 9292   628  3403  2720]]
+
+La media degli elementi della matrice è: 
+127.5625
+
+Il determinante della matrice è : 
+-72828387.00000001
+
