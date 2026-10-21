@@ -17,7 +17,7 @@ with open("esercizio_4.txt","w") as file:
 #Menu con varie operazioni disponibili 
 while(True):
 
-    operazione = int(input("Scegli 1 per estrarre la sotto-matrice centrale, 2 per la trasposta, 3 per la somma degli elementi, 4 per aggiungere una matrice, 5 per la media, 6 per il determinante della matrice, 7  per uscire: "))
+    operazione = int(input("Scegli 1 per estrarre la sotto-matrice centrale, 2 per la trasposta, 3 per la somma degli elementi, 4 per aggiungere una matrice, 5 per la media, 6 per il determinante della matrice, 7 per calcolare la matrice inversa, 8  per uscire: "))
 
 
     if(operazione == 1):
@@ -99,7 +99,29 @@ while(True):
             print("Impossibile procedere con l'operazione, matrice non quadrata!")
 
 #-----------------------------------------------------------------------
-        
+
+    elif(operazione == 7):
+        #Controllo se il determinante è diverso da 0 
+        #Controllo se la matrice è quadrata
+        if(righe == colonne and np.linalg.det(matrix) != 0 ):
+            
+            inv_matrix = np.linalg.inv(matrix)
+            print("La matrice inversa è: ", inv_matrix)
+
+            with open("esercizio_4.txt","a") as file:
+                file.write("La matrice inversa è : \n")
+                file.write(str(inv_matrix) + "\n"+ "\n")
+            
+        else:
+            print("Impossibile procedere con l'operazione, matrice non invertibile!")
+
+#-----------------------------------------------------------------------
+    elif(operazione == 8):
+
+        #applico la funzione seno a tutti gli elementi della matrice
+        pass
+#-----------------------------------------------------------------------
+           
     else:
         break
     
