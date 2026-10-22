@@ -20,7 +20,7 @@ mediana = df["Temperatura"].median()
 # Grafico con Matplotlib
 x =         ["Media", "Massima", "Minima", "Mediana"]
 y =         [media, massima, minima, mediana]
-colori =    ["green", "tomato", "blue", "orange",]
+colori =    ["green", "red", "blue", "orange",]
 
 
 plt.plot(x, y)
