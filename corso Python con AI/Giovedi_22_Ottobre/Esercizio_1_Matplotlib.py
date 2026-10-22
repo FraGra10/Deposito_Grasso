@@ -11,6 +11,7 @@ temperature = temperature.round(1)
 
 df = pd.DataFrame({"Temperatura": temperature})
 
+#Calcolo  media,massimo,minimo e mediana
 media = df["Temperatura"].mean()
 massima = df["Temperatura"].max()
 minima = df["Temperatura"].min()
