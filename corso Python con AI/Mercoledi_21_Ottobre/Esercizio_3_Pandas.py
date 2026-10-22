@@ -36,3 +36,5 @@ print("")
 new_df = df_pr[df_pr["totale vendite"] > 1000]
 
 print(new_df)
+
+#da finire
