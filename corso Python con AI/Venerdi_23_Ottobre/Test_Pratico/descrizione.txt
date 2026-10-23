@@ -1,0 +1,26 @@
+Entrambi i DataFrame sono stati inizialmente esaminati per comprendere la struttura dei dati, 
+analizzando i nomi delle colonne, gli indici delle righe oltre alle info sui valori contenuti.
+
+Successivamente, sono stati effettuati controlli sulla qualità dei dati, 
+verificando la presenza di righe duplicate e di valori nulli. 
+In entrambi i dataset non sono state rilevate occorrenze di questo tipo.
+
+L'analisi si è concentrata sulle vendite di caramelle suddivise per area geografica.
+ I risultati hanno evidenziato una distribuzione delle vendite non uniforme sul territorio: 
+ il Centro-Nord registra risultati migliori rispetto al Sud, mentre anche le Isole mostrano valori 
+ inferiori. 
+
+Una differenza analoga è stata osservata analizzando le giacenze di magazzino per area. 
+Il divario tra le diverse zone risulta particolarmente evidente nel confronto con il Sud.
+
+L'analisi del budget destinato al marketing mostra invece differenze territoriali meno marcate rispetto
+ a quelle osservate per vendite e giacenze. Questo aspetto indica che la distribuzione
+  degli investimenti pubblicitari non segue esattamente lo stesso andamento dei risultati commerciali. 
+
+Infine, il dataset relativo alle caratteristiche delle caramelle è stato ordinato in base alla variabile
+ sugarpercent, con l'obiettivo di individuare i prodotti caratterizzati dai valori più elevati.
+  Tra i risultati ottenuti figurano caramelle con valori superiori a 0.98. 
+
+Nel complesso, l'analisi ha permesso di esplorare la qualità dei dati, individuare differenze 
+territoriali nelle vendite e nelle giacenze e identificare i prodotti con i valori più elevati 
+di sugarpercent.
