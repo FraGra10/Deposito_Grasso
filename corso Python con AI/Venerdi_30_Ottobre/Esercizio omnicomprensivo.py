@@ -149,6 +149,15 @@ classi_vicini = y_train[indici[0]]
 #predict_proba
 prob = knn.predict_proba(x)
 
+
+#La feature che pesa di più nel calcolo della distanza è quella con la scala numerica più alta: 
+#KNN utilizza le distanze tra i campioni per individuare i vicini più prossimi. 
+# Se una feature ha valori numericamente molto più grandi rispetto alle altre, 
+# può dominare il calcolo della distanza.
+
+#Di conseguenza, le feature con scale più piccole rischiano di avere un'influenza trascurabile 
+#sulla classificazione.
+
 ###### 6) Scaling e regola d'oro ########################################################
 
 #1. Applica `StandardScaler` rispettando la regola d'oro:
@@ -277,6 +286,7 @@ print("Il migliore k guardando il validation set è :", valori_k[index])
 from sklearn.tree import DecisionTreeClassifier, export_text, plot_tree
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np 
 
 dep_values = [1, 2, 3, 5, 8, None]
 
@@ -323,6 +333,14 @@ print(regole)
 #Lo scaling non cambierebbe le decisioni per l'albero perchè se applichiamo uno scaling, 
 # i valori della feature cambiano, ma anche la soglia viene trasformata di conseguenza.
 
+#Calcolo dell'indice di gini sul nodo radice 
+
+fraz = np.bincount(y_train)/len(y_train)
+
+print("Gini radice (manuale):", round(1 - (fraz**2).sum(),3))
+print("Gini radice (sklearn):", round(albero.tree_.impurity[0],3))
+
+#Confronto tra l'albero scalato e quello non scalato 
 albero_s = DecisionTreeClassifier(max_depth=5,random_state=42)
 
 albero_s.fit(X_train_s, y_train)
