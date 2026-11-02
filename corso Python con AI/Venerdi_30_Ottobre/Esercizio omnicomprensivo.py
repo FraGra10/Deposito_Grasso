@@ -24,12 +24,13 @@
 
 from sklearn.datasets import load_breast_cancer
 
+#1)
+#Caricamento dataset
 breast_cancer = load_breast_cancer(as_frame=True)
 
 X = breast_cancer.data 
 y = breast_cancer.target 
 
-'''
 print("La forma di X è:", X.shape)
 print("")
 print("La forma di y è:", y.shape)
@@ -55,7 +56,7 @@ print(scale.idxmax(), ":", scale.max())
 print("\nFeature con scala più piccola:")
 print(scale.idxmin(), ":", scale.min())
 print("")
-'''
+
 #La presenza di questa differenza così grande nelle scale, porterà a un processo di standardizzazione
 #dal momento che alcune feature potrebbero pesare di più sulla validazione del modello, portando il 
 #modello ad essere meno bravo a predire . 
@@ -73,7 +74,7 @@ X,y = load_breast_cancer(return_X_y=True)
 X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42,stratify=y)
 X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=42,stratify=y_temp)
 
-'''
+
 #Dimensioni dei tre insiemi
 print("Dimensione di X_test: ", X_test.shape)
 print("Dimensione di X_train: ", X_train.shape)
@@ -90,7 +91,7 @@ print("Percentuale di maligni nella validation:",
 print("Percentuale di maligni nel test:",
       (y_test == 0).mean() * 100, "%")
 
-'''
+
 #################################4) Baseline #########################################################
 #1. Addestra un `DummyClassifier(strategy="most_frequent")` e calcola l'accuratezza sul validation set.
 #2. Calcola anche la recall sui maligni (`pos_label=0`, `zero_division=0`).
@@ -99,10 +100,15 @@ print("Percentuale di maligni nel test:",
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import recall_score
 
+#Definizione ed addestramento DummyClassifier 
 Dummy = DummyClassifier(strategy="most_frequent").fit(X_train,y_train)
+
+#calcolo accuratezza del modello sul validation set 
 
 val_accuracy = Dummy.score(X_val,y_val)
 y_pred = Dummy.predict(X_val)
+
+#Calcolo del recall sui maligni 
 mal_recall = recall_score(y_val,y_pred, pos_label= 0, zero_division= 0)
 
 print("Accuratezza sul validation set: ", val_accuracy)
@@ -125,12 +131,15 @@ print("recall sui maligni:", mal_recall)
 #4. Identifica la feature che pesa di più nel calcolo della distanza e spiega perché è un problema.
 from sklearn.neighbors import KNeighborsClassifier
 
+#Definizione ed addestramento di un KNN Classifier 
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 
+#Predict sul validation e training set 
 y_train_pred = knn.predict(X_train)
 y_val_pred = knn.predict(X_val)
 
+#Misura dell'accuratezza sui due set 
 acc_train = knn.score(X_train, y_train)
 acc_val = knn.score(X_val, y_val)
 
@@ -176,6 +185,7 @@ X,y = load_breast_cancer(return_X_y=True)
 X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42,stratify=y)
 X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=42,stratify=y_temp)
 
+#Applicazione Standard Scaler con fit solo sul set di training ;  transform su tutti e tre 
 scaler = StandardScaler().fit(X_train)
 X_train_s = scaler.transform(X_train)
 X_val_s = scaler.transform(X_val)
@@ -492,3 +502,70 @@ print("Recall per il KNN",     TP/(TP + FN))
 #La stima è attendibile perché ottenuta su un test set indipendente,
 #mai utilizzato durante l'addestramento. 
 #La precision è del 100%: nessun caso di tumore benigno è stato classificato come tumore maligno.
+
+
+###Extra
+#1. Aggiungi il modello `KNeighborsClassifier(weights="distance")` e confrontalo con quello standard.
+
+#Creazione dell'istanza del modello
+knn_2 = KNeighborsClassifier(weights="distance",n_neighbors=3).fit(X_train_f_s,y_train_f)
+
+y_pred_knn_2 = knn_2.predict(X_test_s)
+
+print("")
+print("accuratezza del KNN-weights-distance:", accuracy_score(y_test,y_pred_knn_2))
+print("precision del KNN-weights-distance:", precision_score(y_test,y_pred_knn_2, pos_label=0, zero_division=0))
+print("recall  del KNN-weights-distance:", recall_score(y_test, y_pred_knn_2, pos_label=0, zero_division=0))
+
+#L'utilizzo di weights="distance" non ha prodotto miglioramenti rispetto al KNN standard. 
+# Le metriche ottenute sono identiche: entrambi i modelli presentano un'accuratezza del 98,25%
+# e una recall del 95,24% sulla classe maligna. 
+
+#2) Ripeti la scelta di k con 5 valori di `random_state` diversi nello split e 
+# disegna le 5 curve di validation sullo stesso grafico: 
+# quanto cambia il k "migliore"? 
+# Cosa suggerisce sull'affidabilità di un singolo split? *(anticipazione della cross-validation)*
+
+X,y = load_breast_cancer(return_X_y=True)
+
+random_state = [ 0 , 10, 30, 42, 80 ]
+
+acc_val_list = []
+for i in random_state:
+    
+    X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=i,stratify=y)
+    X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=i,stratify=y_temp)
+
+    scaler = StandardScaler().fit(X_train)
+    X_train_s = scaler.transform(X_train)
+    X_val_s = scaler.transform(X_val)
+    x_test_s = scaler.transform(X_test)
+
+    valori_k = range(1,43,2)
+    
+    acc_validation = []
+
+#Calcolo dell'accuratezza di training e validazione su valori diversi di k 
+    for k in valori_k:
+        knn = KNeighborsClassifier(n_neighbors=k).fit(X_train_s,y_train)
+        acc_validation.append(knn.score(X_val_s,y_val))
+
+    acc_val_list.append(acc_validation)
+
+
+#Plotting validation curves 
+
+for i in range(len(random_state)):
+    plt.plot(valori_k, acc_val_list[i],
+             label=f"Random state {random_state[i]}")
+
+plt.xlabel("Valore di k")
+plt.ylabel("Accuracy validation")
+plt.title("Confronto KNN con 5 random state")
+plt.legend()
+plt.grid()
+plt.xticks(valori_k)
+
+plt.show()
+
+#Il k migliore può cambiare molto , anche fino a 10.
