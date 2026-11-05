@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 acc_wrong = []
 
 #vettore di random state 
-random_state = [0,5,20,31,42,48,55,65,70,80]
+random_state = [0,10,20,30,40,50,60,70,80,90]
 
 X,y = load_breast_cancer(return_X_y= True)
 
